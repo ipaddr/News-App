@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/authors"
+        tools:text="@string/app_name"
+        android:textStyle="bold"
+        style="@style/ListItemBaseTextView"/>
+
+    <TextView
+        android:id="@+id/sectionName"
+        tools:text="@string/app_name"
+        style="@style/ListItemBaseTextView" />
+
+    <TextView
+        android:id="@+id/webTitle"
+        tools:text="@string/app_name"
+        style="@style/ListItemBaseTextView" />
+
+</LinearLayout>
