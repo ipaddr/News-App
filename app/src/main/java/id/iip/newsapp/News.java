@@ -1,5 +1,6 @@
 package id.iip.newsapp;
 
+import java.util.Date;
 import java.util.List;
 
 public class News {
@@ -19,6 +20,9 @@ public class News {
     /** Variable to represent the contributor of the news */
     private List<String> mContibutor;
 
+    /** Variable to represent the publication of the news */
+    private Date mPublicationDate;
+
     /**
      * Default contructor to init object News
      * @param mType is type of the news
@@ -27,12 +31,13 @@ public class News {
      * @param mWebUrl is web url name of the news
      * @param
      */
-    public News(String mType, String mSectionName, String mWebTitle, String mWebUrl, List<String> mContributor) {
+    public News(String mType, String mSectionName, String mWebTitle, String mWebUrl, List<String> mContributor, Date publicationDate) {
         this.mType = mType;
         this.mSectionName = mSectionName;
         this.mWebTitle = mWebTitle;
         this.mWebUrl = mWebUrl;
         this.mContibutor = mContributor;
+        this.mPublicationDate = publicationDate;
     }
 
     // region member variable getter method
@@ -54,6 +59,10 @@ public class News {
 
     public List<String> getContibutor() {
         return mContibutor;
+    }
+
+    public Date getPublicationDate() {
+        return mPublicationDate;
     }
 
     //endregion

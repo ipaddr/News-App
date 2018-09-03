@@ -22,4 +22,9 @@
         tools:text="@string/app_name"
         style="@style/ListItemBaseTextView" />
 
+    <TextView
+        android:id="@+id/publicationDate"
+        tools:text="@string/app_name"
+        style="@style/ListItemBaseTextView" />
+
 </LinearLayout>

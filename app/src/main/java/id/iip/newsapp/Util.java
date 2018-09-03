@@ -232,13 +232,14 @@ public class Util {
                 String sectionName = object.getString("sectionName");
                 String webTitle = object.getString("webTitle");
                 String webUrl = object.getString("webUrl");
+                Date publicationDate = Util.stringToDate(object.getString("webPublicationDate"));
                 JSONArray tags = object.getJSONArray("tags");
                 List<String> authors = new ArrayList<>();
                 for(int j=0; j < tags.length(); j++){
                     JSONObject tagObject = tags.getJSONObject(j);
                     authors.add(tagObject.getString("webTitle"));
                 }
-                newses.add(new News(type, sectionName, webTitle, webUrl, authors));
+                newses.add(new News(type, sectionName, webTitle, webUrl, authors, publicationDate));
             }
 
         } catch (JSONException e) {
@@ -250,5 +251,21 @@ public class Util {
 
         // Return the list of newses
         return newses;
+    }
+
+    public static Date stringToDate(String InDate){
+        Date outDate = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        try {
+            outDate = sdf.parse(InDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return outDate;
+    }
+
+    public static String dateToString(Date InDate){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        return sdf.format(InDate);
     }
 }

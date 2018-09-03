@@ -32,6 +32,7 @@ public class NewsAdapter extends ArrayAdapter<News> {
             holder.author = (TextView)convertView.findViewById(R.id.authors);
             holder.sectionName = (TextView)convertView.findViewById(R.id.sectionName);
             holder.webTitle = (TextView)convertView.findViewById(R.id.webTitle);
+            holder.publicationDate = (TextView)convertView.findViewById(R.id.publicationDate);
 
             convertView.setTag(holder);
 
@@ -44,6 +45,7 @@ public class NewsAdapter extends ArrayAdapter<News> {
         holder.author.setText(news.getContibutor().toString().replace("[","").replace("]", ""));
         holder.sectionName.setText(news.getSectionName());
         holder.webTitle.setText(news.getWebTitle());
+        holder.publicationDate.setText(Util.dateToString(news.getPublicationDate()));
 
         return convertView;
     }
@@ -53,5 +55,6 @@ public class NewsAdapter extends ArrayAdapter<News> {
         TextView author;
         TextView sectionName;
         TextView webTitle;
+        TextView publicationDate;
     }
 }
