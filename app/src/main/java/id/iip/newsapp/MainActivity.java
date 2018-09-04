@@ -21,7 +21,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<News>>{
     private String URL_NEWS = null;
-    
+
     // variable resource
     private ListView newsListView;
 
@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         return new Uri.Builder().scheme("http")
                 .authority("content.guardianapis.com")
                 .appendPath("search")
-                .appendQueryParameter("api-key", "eb0473e0-98ef-4658-9a62-81aa0085e595")
+                .appendQueryParameter("api-key", "key")
                 .appendQueryParameter("show-tags", "contributor")
                 .appendQueryParameter("q", query).build()
         ;
