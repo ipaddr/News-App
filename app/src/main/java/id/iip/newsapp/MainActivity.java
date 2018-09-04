@@ -6,6 +6,9 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,14 +22,14 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     /** URL of guardian api */
     private final String URL =
-            "http://content.guardianapis.com/search?q=debates&api-key=test&show-tags=contributor"
+            "http://content.guardianapis.com/search?q=debates&api-key=eb0473e0-98ef-4658-9a62-81aa0085e595&show-tags=contributor"
             ;
 
     // variable resource
     private ListView newsListView;
 
     // adapter of list view
-    private ArrayAdapter<News> mAdapter;
+    private NewsAdapter mAdapter;
 
     /** TextView that is displayed when the list is empty */
     private TextView mEmptyStateTextView;
@@ -86,6 +89,33 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         } else {
             mAdapter.clear();
             mEmptyStateTextView.setText(R.string.no_inet);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mAdapter.updateData();
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.settings:
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 

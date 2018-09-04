@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <CheckBoxPreference
+        android:key="@string/author_key"
+        android:title="@string/author"
+        android:defaultValue="true" />
+    <CheckBoxPreference
+        android:key="@string/name_key"
+        android:title="@string/name"
+        android:defaultValue="true" />
+    <CheckBoxPreference
+        android:key="@string/title_key"
+        android:title="@string/title"
+        android:defaultValue="true" />
+    <CheckBoxPreference
+        android:key="@string/publication_date_key"
+        android:title="@string/publication_date"
+        android:defaultValue="true" />
 </PreferenceScreen>
