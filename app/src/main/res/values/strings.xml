@@ -6,6 +6,7 @@
     <!-- Text to display in the list when there are no news [CHAR LIMIT=NONE] -->
     <string name="no_inet">No internet connection.</string>
 
+    <string name="query">Query</string>
     <string name="author">Author</string>
     <string name="name">Name</string>
     <string name="title">Title</string>
@@ -14,8 +15,10 @@
 
     <string name="settings">Settings</string>
     <!-- Key -->
+    <string name="query_key">query</string>
     <string name="author_key">author</string>
     <string name="name_key">name</string>
     <string name="title_key">title</string>
     <string name="publication_date_key">publication_date</string>
+    <string name="debates">debates</string>
 </resources>

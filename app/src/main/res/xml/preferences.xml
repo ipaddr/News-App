@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditTextPreference
+        android:key="@string/query_key"
+        android:title="@string/query"
+        android:defaultValue="@string/debates"/>
     <CheckBoxPreference
         android:key="@string/author_key"
         android:title="@string/author"

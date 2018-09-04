@@ -2,6 +2,7 @@ package id.iip.newsapp;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
@@ -19,12 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<News>>{
-
-    /** URL of guardian api */
-    private final String URL =
-            "http://content.guardianapis.com/search?q=debates&api-key=eb0473e0-98ef-4658-9a62-81aa0085e595&show-tags=contributor"
-            ;
-
+    private String URL_NEWS = null;
+    
     // variable resource
     private ListView newsListView;
 
@@ -77,6 +74,15 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         // Set the adapter on the {@link ListView}
         // so the list can be populated in the user interface
         newsListView.setAdapter(mAdapter);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String query = PreferenceManager.getDefaultSharedPreferences(this).getString(getString(R.string.query_key), getString(R.string.debates));
+
+        // default query = debates
+        URL_NEWS = MainActivity.getNewsURL(query).toString();
 
         if (Util.networkConnectivity(this)){
             // Get a reference to the LoaderManager, in order to interact with loaders.
@@ -85,18 +91,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             // Initialize the loader. Pass in the int ID constant defined above and pass in null for
             // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
             // because this activity implements the LoaderCallbacks interface).
-            loaderManager.initLoader(news_LOADER_ID, null, this);
+            loaderManager.restartLoader(news_LOADER_ID, null, this);
         } else {
             mAdapter.clear();
             mEmptyStateTextView.setText(R.string.no_inet);
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mAdapter.updateData();
-        mAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -123,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public Loader<List<News>> onCreateLoader(int id, Bundle args) {
         loadingIndicator.setVisibility(View.VISIBLE);
         // Create a new loader for the given URL
-        return new GuardianAPIAsynTaskLoader(this, URL);
+        return new GuardianAPIAsynTaskLoader(this, URL_NEWS);
     }
 
     @Override
@@ -143,5 +142,15 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoaderReset(Loader<List<News>> loader) {
         mAdapter.clear();
+    }
+
+    public static Uri getNewsURL(String query){
+        return new Uri.Builder().scheme("http")
+                .authority("content.guardianapis.com")
+                .appendPath("search")
+                .appendQueryParameter("api-key", "eb0473e0-98ef-4658-9a62-81aa0085e595")
+                .appendQueryParameter("show-tags", "contributor")
+                .appendQueryParameter("q", query).build()
+        ;
     }
 }
